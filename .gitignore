@@ -57,3 +57,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+#Noesis
+/polypoly/Assets/UI/**
+!/polypoly/Assets/UI/link.bat
