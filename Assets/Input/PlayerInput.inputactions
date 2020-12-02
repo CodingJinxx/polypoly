@@ -90,6 +90,52 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "GridInteraction",
+            "id": "0a111a09-d00e-4cf2-94db-ea00e64ff8c7",
+            "actions": [
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "dc4d2950-cd81-4835-bb62-058a5117a799",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap"
+                },
+                {
+                    "name": "CursorPosition",
+                    "type": "Value",
+                    "id": "0baa9b4b-7486-4ead-ba67-6eecd0d216d2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "795d13d9-09fd-45a7-b79c-9d1282f8f442",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75e8958b-afb5-48a7-8c81-5c385f62e5c5",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CursorPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
