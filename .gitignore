@@ -34,6 +34,8 @@ ExportedObj/
 *.tmp
 *.user
 *.userprefs
+*.csproj
+*.sln
 *.pidb
 *.booproj
 *.svd
@@ -58,5 +60,7 @@ sysinfo.txt
 crashlytics-build.properties
 
 #Noesis
-/polypoly/Assets/UI/**
-!/polypoly/Assets/UI/link.bat
+/Assets/UI/**
+!/Assets/UI/link.bat
+!/UserInterface/**/*.sln
+!/UserInterface/**/*.csproj
