@@ -33,6 +33,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Double"",
                     ""processors"": """",
                     ""interactions"": ""Press""
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Value"",
+                    ""id"": ""3e616fdc-09dc-4293-8d72-6658a66b1e50"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -101,6 +109,39 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""9d728662-d0d1-4da2-9ccb-3c8a62bbab66"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7b4a4356-d07f-4253-b839-d6be42709311"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c6a0c6b7-65b9-48e0-b7e5-16b229a2631f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -161,6 +202,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_GridInteraction = asset.FindActionMap("GridInteraction", throwIfNotFound: true);
         m_GridInteraction_Click = m_GridInteraction.FindAction("Click", throwIfNotFound: true);
         m_GridInteraction_CursorPosition = m_GridInteraction.FindAction("CursorPosition", throwIfNotFound: true);
+        m_Camera_Rotate = m_Camera.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -212,12 +254,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private ICameraActions m_CameraActionsCallbackInterface;
     private readonly InputAction m_Camera_Move;
     private readonly InputAction m_Camera_Zoom;
+    private readonly InputAction m_Camera_Rotate;
     public struct CameraActions
     {
         private @PlayerInput m_Wrapper;
         public CameraActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Camera_Move;
         public InputAction @Zoom => m_Wrapper.m_Camera_Zoom;
+        public InputAction @Rotate => m_Wrapper.m_Camera_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -233,6 +277,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Zoom.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoom;
                 @Zoom.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoom;
                 @Zoom.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnZoom;
+                @Rotate.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnRotate;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -243,6 +290,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Zoom.started += instance.OnZoom;
                 @Zoom.performed += instance.OnZoom;
                 @Zoom.canceled += instance.OnZoom;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
             }
         }
     }
@@ -292,6 +342,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnZoom(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
     public interface IGridInteractionActions
     {
