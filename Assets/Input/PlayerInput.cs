@@ -24,13 +24,13 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""e498c525-b7d5-4b63-8c52-94bc5de196b2"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": ""Press""
+                    ""interactions"": ""Press(pressPoint=0.5)""
                 },
                 {
                     ""name"": ""Zoom"",
                     ""type"": ""Value"",
                     ""id"": ""8d13588c-273f-4cc2-998d-4d88b56faf9b"",
-                    ""expectedControlType"": ""Axis"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
@@ -135,7 +135,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b005c6ee-5765-4a74-99d5-76b635094fe6"",
-                    ""path"": ""<Mouse>/scroll/y"",
+                    ""path"": ""<Mouse>/scroll"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
