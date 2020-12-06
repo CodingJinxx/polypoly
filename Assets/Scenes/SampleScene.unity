@@ -493,7 +493,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridCollider: {fileID: 630002928}
   m_GridSystem: {fileID: 1888167864}
-  CurrentTile: {fileID: 3249713939998365554, guid: f27faef9099a4a64997e62c84ecaac8c,
+  CurrentTile: {fileID: 7000756616601880109, guid: 1c6b20e25c3233a40ae383f91ba2d142,
     type: 3}
   IsBuildMode: 1
 --- !u!114 &1888167864
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_RepeatDelay: 0.5
   m_RepeatRate: 0.05
-  m_FallbackOnIMGUIKeyboardEvents: 1
+  m_FallbackOnIMGUIKeyboardEvents: 0
   m_InputActionAsset: {fileID: -944628639613478452, guid: 5c4fd9a4253b4fe4792743073143c240,
     type: 3}
   m_NavigateAction: {fileID: -2161168675222211785, guid: 5c4fd9a4253b4fe4792743073143c240,

@@ -24,17 +24,12 @@ public class TileList : MonoBehaviour
         LoadPrefabs();
     }
 
-    private void Update()
-    {
-        Debug.Log("test");
-    }
 
     public void AddEntry(string tileEntryLable, Action tileEntrySelectedCallback)
     {
         var entry = emptyTileEntry.CloneTree();
         entry.Q<Label>("TileEntryLabel").text = tileEntryLable;
         tileList.Add(entry);
-        document.Q<Button>("TileEntryButton")
     }
 
     public void LoadPrefabs()
