@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32cb0206ed0bc0d4b91a4e54d600f906, type: 3}
   m_Name: NoesisSettings
   m_EditorClassIdentifier: 
-  licenseName: polypoly
-  licenseKey: zOdNWw+vTVtxXMzhSA9tsst6AC6WPB00slZyeIJ8yeaVJi4n
-  applicationResources: {fileID: 11400000, guid: e955ae2bc375093408de3ff0854ec266,
+  licenseName: 
+  licenseKey: 
+  applicationResources: {fileID: 11400000, guid: dab8ce92eddd4814cbecf3b27c3681ed,
     type: 2}
-  defaultFont: {fileID: 11400000, guid: 526c60fe4f6044f4ea89d526383af00f, type: 2}
+  defaultFont: {fileID: 11400000, guid: b3ab3e4919f1b524381735ffc56c8632, type: 2}
   defaultFontSize: 15
   defaultFontWeight: 400
   defaultFontStretch: 5
@@ -28,7 +28,7 @@ MonoBehaviour:
   linearRendering: 0
   previewEnabled: 1
   debugImporter: 0
-  hotReloading: 1
+  hotReloading: 0
   logVerbosity: 0
   AppStarting:
     Texture: {fileID: 0}
