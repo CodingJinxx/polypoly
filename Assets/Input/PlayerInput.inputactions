@@ -11,13 +11,13 @@
                     "id": "e498c525-b7d5-4b63-8c52-94bc5de196b2",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press(pressPoint=0.5)"
+                    "interactions": ""
                 },
                 {
                     "name": "Zoom",
                     "type": "Value",
                     "id": "8d13588c-273f-4cc2-998d-4d88b56faf9b",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": ""
                 },
@@ -25,9 +25,25 @@
                     "name": "Rotate",
                     "type": "Value",
                     "id": "3e616fdc-09dc-4293-8d72-6658a66b1e50",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "acd1c3dd-6d4a-4358-96a7-93d47f57542a",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": ""
+                },
+                {
+                    "name": "DoOrbit",
+                    "type": "Button",
+                    "id": "86dd2c4c-e202-4ca9-8ff7-ec366488f6f7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -87,9 +103,20 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "2D Vector",
-                    "id": "9d728662-d0d1-4da2-9ccb-3c8a62bbab66",
-                    "path": "2DVector",
+                    "name": "",
+                    "id": "b005c6ee-5765-4a74-99d5-76b635094fe6",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "f98367c3-3e1b-4765-9fb0-03e87c143f54",
+                    "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -98,8 +125,8 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "left",
-                    "id": "7b4a4356-d07f-4253-b839-d6be42709311",
+                    "name": "negative",
+                    "id": "55c9254c-5051-4f51-8d0d-cb2ce9242bfd",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
@@ -109,8 +136,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "right",
-                    "id": "c6a0c6b7-65b9-48e0-b7e5-16b229a2631f",
+                    "name": "positive",
+                    "id": "59f7a115-d68c-49ce-9dd7-0a1e54d9fa56",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
@@ -121,12 +148,34 @@
                 },
                 {
                     "name": "",
-                    "id": "b005c6ee-5765-4a74-99d5-76b635094fe6",
-                    "path": "<Mouse>/scroll",
+                    "id": "df8962d8-9217-4e5b-849a-e46eaa8b3015",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Zoom",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0cb128a-2ce0-4774-ba6c-c0a7687892b4",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DoOrbit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ec9bff28-cf93-4388-8c09-ba0599c60978",
+                    "path": "<Mouse>/forwardButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DoOrbit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -151,6 +200,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToggleBuildMode",
+                    "type": "Button",
+                    "id": "4c696bd5-5bde-4c89-9a63-ec54183bfdd3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -173,6 +230,196 @@
                     "processors": "",
                     "groups": "",
                     "action": "CursorPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a62a1344-b83c-4c7b-84ca-d71a323a82bd",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleBuildMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "2ca2ec90-bc10-441a-8c93-daf2c6b04152",
+            "actions": [
+                {
+                    "name": "Navigate",
+                    "type": "Value",
+                    "id": "89bf1206-efab-457c-a444-442c77f79188",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Tab",
+                    "type": "Button",
+                    "id": "4b7ce3a5-3635-4597-97e7-fbc47162240a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Submit",
+                    "type": "Button",
+                    "id": "bdafe063-d721-482b-9ca5-9140f8e5ba5b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "9db20e4e-b5b0-450d-b35e-de4db28eb482",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "4fb3ff1c-287f-4e7d-afa3-8631c63e3ff2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "ca09375f-1d47-41e5-bb9f-fbf1269896ed",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Scroll Wheel",
+                    "type": "Button",
+                    "id": "de6639e6-5681-47a3-bf13-f819c76e1f9a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Middle Click",
+                    "type": "Button",
+                    "id": "6f7ae924-6170-40da-aab8-5ca8d7740f75",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Right Click",
+                    "type": "Button",
+                    "id": "989bcfc0-256f-43cc-ac06-ee0e60bcf25e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c95db3b9-046e-4bea-86f3-eee61b7be924",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b05e1738-6bc8-4d73-8669-a472b6d6bb7e",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Navigate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67ad8a6e-1c16-4d07-91c4-ba244053c2ae",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6c5adf2-84d9-41ca-98d6-f8e4f73aaf73",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc0a6081-3657-4949-97fd-567ec23d08ed",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ae34c54-b418-40bb-b264-38d03c1132ec",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20ff8d0c-bb18-45e8-b5b6-f1a07a17788e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Scroll Wheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bb9749f2-a164-47c4-9261-250dd4eeea1e",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Middle Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be41e931-0574-45d5-b608-ca819640f954",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

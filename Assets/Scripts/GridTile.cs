@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class GridTile : MonoBehaviour
 {
-    
+    public string Name;
 }
+    

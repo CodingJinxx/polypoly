@@ -4,65 +4,155 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, PlayerInput.ICameraActions
 {
+    // Unity Objects
+    [SerializeField] private Camera camera;
+    [SerializeField] private GameObject rig;
     private PlayerInput controls;
-
+    
+    // Initials
+    [SerializeField, Range(0, 1)] private float InitialZoom = 0.25f;
+    
+    // Sensitivities and Speeds
+    [SerializeField] private float ZoomSensitivity = 1.0f;
+    [SerializeField] private float RotationSpeed = 1.0f;
+    [SerializeField] private float MovementSpeed = 0.5f;
+    [SerializeField] private float OrbitSpeed = 0.5f;
+    
+    // Limits
+    [SerializeField] private float MaxZoomDistance = 100.0f;
+    [SerializeField] private float MinZoomDistance = 0.1f;
+    [SerializeField] private float MaxTilt = 80.0f;
+    [SerializeField] private float MinTilt = 10.0f;
+    
+    // Lerp Time
+    [SerializeField] private float ZoomTime = 10.0f;
     [SerializeField] private float RotationTime = 10.0f;
     [SerializeField] private float MovementTime = 10.0f;
-    
-    private Vector3 inputVector;
-    private Vector3 desiredMove;
-    private Vector3 navigation;
-    private Quaternion rotation;
 
-    public float cameraSpeed = 10f;
-    public float cameraRotationSpeed = 5.0f;
+    // Calculation Variables
+    private Vector2 velocity { get => b_moveInput * MovementSpeed; }
+    private float interpolatedZoom { get => Mathf.Clamp01((rawZoom - MinZoomDistance) * 1 / (MaxZoomDistance - MinZoomDistance)); }
+    private float rawZoom;
+
+    // Buffer Input Variables
+    private Vector2 b_moveInput;
+    private float b_rotationInput;
+    private float b_zoomInput;
+    private Vector2 b_lookInput;
+    private bool b_doOrbitInput;
+
+    // Future Camera Position and Rotation
+    private Vector3 f_cam_pos;
+    private Quaternion f_cam_rot;
+
+    // Future Rig Position and Rotation
+    private Vector3 f_rig_pos;
+    private Quaternion f_rig_rot;
     
-    public Transform cameraTransform;
-    public Vector3 zoomAmount;
-    private Vector3 newZoom;
-    void Awake()
-    {
-        controls = new PlayerInput();
-        newZoom = cameraTransform.localPosition;
-    }
     private void OnEnable()
     {
+        if (controls is null)
+        {
+            controls = new PlayerInput();
+        }
         controls.Enable();
+        controls.Camera.SetCallbacks(this);
     }
 
     private void OnDisable()
     {
         controls.Disable();
     }
-    void FixedUpdate()
+
+    private void Start()
     {
-        Move();
-        Rotate();
-        Zoom();
+        rawZoom = (MaxZoomDistance - MinZoomDistance) * InitialZoom;
+        
+        f_cam_pos = camera.transform.localPosition;
+        f_cam_rot = camera.transform.localRotation;
+
+        f_rig_pos = rig.transform.localPosition;
+        f_rig_rot = rig.transform.localRotation;
     }
 
-    void Move()
+    private void Update()
     {
-        inputVector = controls.Camera.Move.ReadValue<Vector2>() * cameraSpeed;
-        desiredMove = (transform.forward * inputVector.y) + (transform.right * inputVector.x);
-        navigation.Set(desiredMove.x, 0f, desiredMove.z);
-        transform.position = Vector3.Lerp(transform.position,  transform.position + navigation, Time.deltaTime * MovementTime);
+        futuresUpdate();
+        
+        rig.transform.localPosition = Vector3.Lerp(rig.transform.localPosition, f_rig_pos, Time.deltaTime * MovementTime);
+        rig.transform.localRotation = Quaternion.Lerp(rig.transform.localRotation, f_rig_rot, Time.deltaTime * RotationTime);
+        camera.transform.localPosition = Vector3.Lerp(camera.transform.localPosition, f_cam_pos, Time.deltaTime * ZoomTime);
     }
 
-    void Rotate()
+    private void futuresUpdate()
     {
-        inputVector = controls.Camera.Rotate.ReadValue<Vector2>() * cameraRotationSpeed;
-        rotation = Quaternion.Euler(0f, inputVector.x, 0f);
-        transform.rotation = Quaternion.Lerp(transform.rotation, transform.rotation * rotation, Time.deltaTime * RotationTime);
+        if (!b_doOrbitInput)
+        {
+            // Rotation Input around Y axis
+            Vector3 Rotation = new Vector3(0, b_rotationInput * RotationSpeed, 0);
+            Rotation = Quaternion.Euler(-f_rig_rot.eulerAngles.x, 0.0f, 0.0f) * Rotation;
+            f_rig_rot *= Quaternion.Euler(Rotation);
+        }
+        else
+        {
+            // Orbit
+            Vector3 XRotation = new Vector3(b_lookInput.y * OrbitSpeed, 0.0f, 0.0f);
+            f_rig_rot *= Quaternion.Euler(XRotation);
+            Vector3 ClampedRigRotation = f_rig_rot.eulerAngles;
+            ClampedRigRotation.x = Mathf.Clamp(ClampedRigRotation.x, MinTilt, MaxTilt);
+            f_rig_rot = Quaternion.Euler(ClampedRigRotation);
+            
+            Vector3 YRotation = new Vector3(0, b_lookInput.x * OrbitSpeed, 0.0f);
+            YRotation = Quaternion.Euler(-f_rig_rot.eulerAngles.x, 0.0f, 0.0f) * YRotation;
+            f_rig_rot *= Quaternion.Euler(YRotation);
+            
+            // Hack to keep z rotation 0.0f
+            Vector3 ZAxisLockHack = f_rig_rot.eulerAngles;
+            ZAxisLockHack.z = 0.0f;
+            f_rig_rot = Quaternion.Euler(ZAxisLockHack);
+        }
+        
+        
+        // Forward Movement
+        Vector3 leveledRotationAngles = f_rig_rot.eulerAngles;
+        leveledRotationAngles.x = 0.0f;
+        Quaternion leveledRotation = Quaternion.Euler(leveledRotationAngles);
+        Vector3 Forward = (leveledRotation * Vector3.forward);
+        Vector3 Right = (leveledRotation * Vector3.right);
+        Vector2 distanceAdjustedVelocity = velocity * (interpolatedZoom + 0.5f);
+        f_rig_pos += distanceAdjustedVelocity.x * Right + distanceAdjustedVelocity.y * Forward;
+
+        // Zoom
+        f_cam_pos.z = rawZoom * -1;
     }
 
-    void Zoom()
+    public void OnMove(InputAction.CallbackContext context)
     {
-        inputVector = controls.Camera.Zoom.ReadValue<Vector2>() / 120;
-        newZoom += zoomAmount * inputVector.y;
-        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * MovementTime);
+        b_moveInput = controls.Camera.Move.ReadValue<Vector2>();
+    }
 
+    public void OnZoom(InputAction.CallbackContext context)
+    {
+        b_zoomInput = controls.Camera.Zoom.ReadValue<float>();
+
+        var zoomAddition = (-b_zoomInput / (120.0f * 1/ZoomSensitivity)) * interpolatedZoom;
+        rawZoom = Mathf.Clamp(rawZoom + zoomAddition, MinZoomDistance, MaxZoomDistance);
+    }
+
+    public void OnRotate(InputAction.CallbackContext context)
+    {
+        b_rotationInput = controls.Camera.Rotate.ReadValue<float>();
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        b_lookInput = context.ReadValue<Vector2>();
+    }
+
+    public void OnDoOrbit(InputAction.CallbackContext context)
+    {
+        b_doOrbitInput = context.ReadValueAsButton();
     }
 }
