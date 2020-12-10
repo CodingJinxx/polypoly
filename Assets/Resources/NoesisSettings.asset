@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32cb0206ed0bc0d4b91a4e54d600f906, type: 3}
   m_Name: NoesisSettings
   m_EditorClassIdentifier: 
-  licenseName: 
-  licenseKey: 
+  licenseName: polypoly
+  licenseKey: 48qiLiiCoi5v0bYL0cUnbrfxoiaVb6zDcWO4IZNDiRS9jCCi
   applicationResources: {fileID: 11400000, guid: dab8ce92eddd4814cbecf3b27c3681ed,
     type: 2}
-  defaultFont: {fileID: 11400000, guid: b3ab3e4919f1b524381735ffc56c8632, type: 2}
+  defaultFont: {fileID: 11400000, guid: 75e4ecb06fa8c0e4e89e63c7e345c4c7, type: 2}
   defaultFontSize: 15
   defaultFontWeight: 400
   defaultFontStretch: 5

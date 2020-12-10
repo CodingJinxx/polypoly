@@ -1,0 +1,16 @@
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\bin\Debug\Theme.exe.config
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\bin\Debug\Theme.exe
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\bin\Debug\Theme.pdb
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\bin\Debug\Microsoft.Expression.Interactions.dll
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\bin\Debug\Noesis.GUI.Extensions.dll
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\bin\Debug\System.Windows.Interactivity.xml
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme.csprojAssemblyReference.cache
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme\ResourceDictionaries\DefaultTheme.baml
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\App.g.cs
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme_MarkupCompile.cache
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme.g.resources
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme.csproj.CoreCompileInputs.cache
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme.csproj.CopyComplete
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme.exe
+C:\Users\Jay\Desktop\poly_poly\UserInterface\Theme\obj\Debug\Theme.pdb
