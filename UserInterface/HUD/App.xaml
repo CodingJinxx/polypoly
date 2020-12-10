@@ -2,11 +2,11 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:local="clr-namespace:HUD"
-  StartupUri="/HUD;component/HUD/Assets/MainWindow.xaml">
+  StartupUri="/HUD;component/HUD/Assets/GameUI.xaml">
   <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Resources;component/Resources/ResourceDictionaries/DefaultTheme.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="pack://application:,,,/Theme;component/Theme/ResourceDictionaries/DefaultTheme.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

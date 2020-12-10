@@ -1,0 +1,26 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="PrimaryBackground">#44A7F7</Color>
+    <Color x:Key="PrimaryOverBackground">#64C7F7</Color>
+    <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="{StaticResource PrimaryBackground}"/>
+    <SolidColorBrush x:Key="PrimaryBackgroundOverBrush" Color="{StaticResource PrimaryOverBackground}"/>
+
+    <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+        <Border x:Name="Bd" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource PrimaryBackgroundOverBrush}" TargetName="Bd"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{StaticResource ResourceKey=PrimaryBackgroundBrush}"/>
+        <Setter Property="Template" Value="{StaticResource ButtonTemplate}"/>
+    </Style>
+
+</ResourceDictionary>

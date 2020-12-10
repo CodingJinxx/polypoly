@@ -35,6 +35,9 @@
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>HUD.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
@@ -66,24 +69,26 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="HUD\Assets\MainWindow.xaml">
+    <Page Include="HUD\Assets\GameUI.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="HUD\Assets\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="HUD\Assets\CommandHandler.cs" />
+    <Compile Include="HUD\Assets\GameUI.xaml.cs">
+      <DependentUpon>GameUI.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="HUD\Assets\UserControls\ItemBar.xaml.cs">
-      <DependentUpon>ItemBar.xaml</DependentUpon>
+    <Compile Include="HUD\Assets\UserControls\GridList.xaml.cs">
+      <DependentUpon>GridList.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HUD\Assets\UserControls\GridListViewModel.cs" />
     <Compile Include="HUD\Assets\ViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="HUD\Assets\UserControls\ItemBar.xaml">
+    <Page Include="HUD\Assets\UserControls\GridList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,10 +98,11 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Resources\Resources.csproj">
-      <Project>{3c1e24a9-d3f1-43b0-b87c-ba51f35dc25f}</Project>
-      <Name>Resources</Name>
+    <ProjectReference Include="..\Theme\Theme.csproj">
+      <Project>{7d0e4e60-4d24-4afb-ad08-7dec5ee194f1}</Project>
+      <Name>Theme</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

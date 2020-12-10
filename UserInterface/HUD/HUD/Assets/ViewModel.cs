@@ -4,6 +4,7 @@ using Noesis;
 using System.Windows.Media;
 
 #endif
+using HUD.UserControls;
 
 namespace HUD
 {
@@ -12,9 +13,11 @@ namespace HUD
     /// </summary>
     public partial class ViewModel
     {
+        public GridListViewModel gridListViewModel { get; set; }
+
         public ViewModel()
         {
-
+            gridListViewModel = new GridListViewModel();
         }
     }
 }

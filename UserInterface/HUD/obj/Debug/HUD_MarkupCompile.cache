@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Jay\Desktop\polypoly\UserInterface\HUD\obj\Debug\
+C:\Users\Jay\Desktop\poly_poly\UserInterface\HUD\obj\Debug\
 HUD
 none
 false
 DEBUG;TRACE
-C:\Users\Jay\Desktop\polypoly\UserInterface\HUD\App.xaml
-21848763870
+C:\Users\Jay\Desktop\poly_poly\UserInterface\HUD\App.xaml
+2-692391060
 
-5-714377343
-16-870119633
-HUD\Assets\MainWindow.xaml;HUD\Assets\UserControls\ItemBar.xaml;
+7-43424046
+161984788703
+HUD\Assets\GameUI.xaml;HUD\Assets\UserControls\GridList.xaml;
 
 False
 
