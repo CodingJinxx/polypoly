@@ -30,7 +30,6 @@ namespace DefaultNamespace
             viewmodel.gridListViewModel = gridviewmodel;
             
             view.Content.DataContext = viewmodel;
-            Debug.Log("");
         }
     }
 }

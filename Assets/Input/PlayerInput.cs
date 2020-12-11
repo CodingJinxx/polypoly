@@ -258,6 +258,134 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""FirstPersonPlayer"",
+            ""id"": ""d552bcf0-9e96-4460-867e-312b8b1317c2"",
+            ""actions"": [
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""4b9ac5ce-30c1-434f-8f6d-5576483c9fd3"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""bf85f334-01dd-48e0-aee7-48bc19c3acbb"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""8489d58f-3b8b-4579-9cf9-585d919214fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Value"",
+                    ""id"": ""5c1e4c66-97ef-4b79-b5fc-e2db9fb2124e"",
+                    ""expectedControlType"": ""Analog"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""37955be7-0555-4f93-9e22-b5a836eec931"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e60a16e1-c963-4f4e-aa33-965504ac1f25"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""d913a4c3-1d7a-418d-a12c-97abd65adc1d"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""8b7508b8-4261-4303-8063-625392a2bdc9"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""f4a5100a-dda7-4fe0-9e01-5b25cd5d0cd6"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""60e65831-00fa-464a-a6a9-31881b1e8847"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75de3459-e34b-41a8-9e7a-32ce9b12a49c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0318340d-2c3f-4068-9373-005cb0bce578"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -274,6 +402,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_GridInteraction_Click = m_GridInteraction.FindAction("Click", throwIfNotFound: true);
         m_GridInteraction_CursorPosition = m_GridInteraction.FindAction("CursorPosition", throwIfNotFound: true);
         m_GridInteraction_ToggleBuildMode = m_GridInteraction.FindAction("ToggleBuildMode", throwIfNotFound: true);
+        // FirstPersonPlayer
+        m_FirstPersonPlayer = asset.FindActionMap("FirstPersonPlayer", throwIfNotFound: true);
+        m_FirstPersonPlayer_Movement = m_FirstPersonPlayer.FindAction("Movement", throwIfNotFound: true);
+        m_FirstPersonPlayer_Look = m_FirstPersonPlayer.FindAction("Look", throwIfNotFound: true);
+        m_FirstPersonPlayer_Jump = m_FirstPersonPlayer.FindAction("Jump", throwIfNotFound: true);
+        m_FirstPersonPlayer_Fire = m_FirstPersonPlayer.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -433,6 +567,63 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         }
     }
     public GridInteractionActions @GridInteraction => new GridInteractionActions(this);
+
+    // FirstPersonPlayer
+    private readonly InputActionMap m_FirstPersonPlayer;
+    private IFirstPersonPlayerActions m_FirstPersonPlayerActionsCallbackInterface;
+    private readonly InputAction m_FirstPersonPlayer_Movement;
+    private readonly InputAction m_FirstPersonPlayer_Look;
+    private readonly InputAction m_FirstPersonPlayer_Jump;
+    private readonly InputAction m_FirstPersonPlayer_Fire;
+    public struct FirstPersonPlayerActions
+    {
+        private @PlayerInput m_Wrapper;
+        public FirstPersonPlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Movement => m_Wrapper.m_FirstPersonPlayer_Movement;
+        public InputAction @Look => m_Wrapper.m_FirstPersonPlayer_Look;
+        public InputAction @Jump => m_Wrapper.m_FirstPersonPlayer_Jump;
+        public InputAction @Fire => m_Wrapper.m_FirstPersonPlayer_Fire;
+        public InputActionMap Get() { return m_Wrapper.m_FirstPersonPlayer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(FirstPersonPlayerActions set) { return set.Get(); }
+        public void SetCallbacks(IFirstPersonPlayerActions instance)
+        {
+            if (m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface != null)
+            {
+                @Movement.started -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnMovement;
+                @Look.started -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnLook;
+                @Look.performed -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnLook;
+                @Look.canceled -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnLook;
+                @Jump.started -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnJump;
+                @Fire.started -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface.OnFire;
+            }
+            m_Wrapper.m_FirstPersonPlayerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @Look.started += instance.OnLook;
+                @Look.performed += instance.OnLook;
+                @Look.canceled += instance.OnLook;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
+            }
+        }
+    }
+    public FirstPersonPlayerActions @FirstPersonPlayer => new FirstPersonPlayerActions(this);
     public interface ICameraActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -446,5 +637,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnCursorPosition(InputAction.CallbackContext context);
         void OnToggleBuildMode(InputAction.CallbackContext context);
+    }
+    public interface IFirstPersonPlayerActions
+    {
+        void OnMovement(InputAction.CallbackContext context);
+        void OnLook(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }
