@@ -75,6 +75,9 @@ public class GodViewController : MonoBehaviour, PlayerInput.ICameraActions
 
         f_rig_pos = rig.transform.localPosition;
         f_rig_rot = rig.transform.localRotation;
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void Update()
