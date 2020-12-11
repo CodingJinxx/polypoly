@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, PlayerInput.ICameraActions
+public class GodViewController : MonoBehaviour, PlayerInput.ICameraActions
 {
     // Unity Objects
     [SerializeField] private Camera camera;
@@ -130,12 +130,12 @@ public class PlayerController : MonoBehaviour, PlayerInput.ICameraActions
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        b_moveInput = controls.Camera.Move.ReadValue<Vector2>();
+        b_moveInput = context.ReadValue<Vector2>();
     }
 
     public void OnZoom(InputAction.CallbackContext context)
     {
-        b_zoomInput = controls.Camera.Zoom.ReadValue<float>();
+        b_zoomInput = context.ReadValue<float>();
 
         var zoomAddition = (-b_zoomInput / (120.0f * 1/ZoomSensitivity)) * interpolatedZoom;
         rawZoom = Mathf.Clamp(rawZoom + zoomAddition, MinZoomDistance, MaxZoomDistance);
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour, PlayerInput.ICameraActions
 
     public void OnRotate(InputAction.CallbackContext context)
     {
-        b_rotationInput = controls.Camera.Rotate.ReadValue<float>();
+        b_rotationInput = context.ReadValue<float>();
     }
 
     public void OnLook(InputAction.CallbackContext context)
