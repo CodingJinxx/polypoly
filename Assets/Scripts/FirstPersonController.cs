@@ -64,6 +64,7 @@ public class FirstPersonController : NetworkBehaviour, PlayerInput.IFirstPersonP
 
     private void Start()
     {
+        PlayerCamera = Camera.main;
         if (isLocalPlayer)
         {
             Transform cameraTransform = Camera.main.gameObject.transform;
