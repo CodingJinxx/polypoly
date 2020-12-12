@@ -1,10 +1,11 @@
 ﻿using System;
+using Mirror;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class FirstPersonController : MonoBehaviour, PlayerInput.IFirstPersonPlayerActions
+public class FirstPersonController : NetworkBehaviour, PlayerInput.IFirstPersonPlayerActions
 {
     // Unity Game Object References
     [SerializeField]
@@ -13,6 +14,7 @@ public class FirstPersonController : MonoBehaviour, PlayerInput.IFirstPersonPlay
     private Camera PlayerCamera;
     [SerializeField]
     private Collider PlayerCollider;
+    public GameObject CameraMountPoint;
 
     private PlayerInput controls;
 
@@ -61,7 +63,15 @@ public class FirstPersonController : MonoBehaviour, PlayerInput.IFirstPersonPlay
     }
 
     private void Start()
-    {       
+    {
+        if (isLocalPlayer)
+        {
+            Transform cameraTransform = Camera.main.gameObject.transform;
+            cameraTransform.parent = CameraMountPoint.transform;
+            cameraTransform.position = CameraMountPoint.transform.position;
+            cameraTransform.rotation = CameraMountPoint.transform.rotation;
+        }
+
         this.d_player_pos = PlayerRigidbody.transform.localPosition;
         this.d_player_rot = PlayerRigidbody.transform.localRotation;
         this.f_camera_pos = PlayerCamera.transform.localPosition;
@@ -75,35 +85,44 @@ public class FirstPersonController : MonoBehaviour, PlayerInput.IFirstPersonPlay
 
     private void FixedUpdate()
     {
-        FutureUpdate();
+        if (isLocalPlayer)
+        {
+            FutureUpdate();
+            
+            //PlayerCamera.transform.localPosition = Vector3.Lerp(PlayerCamera.transform.position, this.f_player_pos, Time.deltaTime * this.MovementTime);
+            PlayerCamera.transform.localRotation = Quaternion.Lerp(PlayerCamera.transform.localRotation,
+                this.f_camera_rot, Time.deltaTime * this.LookTime);
 
-        //PlayerCamera.transform.localPosition = Vector3.Lerp(PlayerCamera.transform.position, this.f_player_pos, Time.deltaTime * this.MovementTime);
-        PlayerCamera.transform.localRotation = Quaternion.Lerp(PlayerCamera.transform.localRotation, this.f_camera_rot, Time.deltaTime * this.LookTime);
-
-        PlayerRigidbody.MovePosition(Vector3.Lerp(PlayerRigidbody.transform.localPosition, PlayerRigidbody.transform.localPosition + d_player_pos, Time.deltaTime * this.MovementTime));
-        PlayerRigidbody.MoveRotation(Quaternion.Lerp(PlayerRigidbody.transform.localRotation, PlayerRigidbody.transform.localRotation * d_player_rot, Time.deltaTime * this.LookTime));
+            PlayerRigidbody.MovePosition(Vector3.Lerp(PlayerRigidbody.transform.localPosition,
+                PlayerRigidbody.transform.localPosition + d_player_pos, Time.deltaTime * this.MovementTime));
+            PlayerRigidbody.MoveRotation(Quaternion.Lerp(PlayerRigidbody.transform.localRotation,
+                PlayerRigidbody.transform.localRotation * d_player_rot, Time.deltaTime * this.LookTime));
+        }
     }
 
     private void FutureUpdate()
     {
         // Look
-        Vector3 YRotation = new Vector3(0, b_look.x * LookSpeed, 0);
-        d_player_rot = Quaternion.Euler(YRotation);
+            Vector3 YRotation = new Vector3(0, b_look.x * LookSpeed, 0);
+            d_player_rot = Quaternion.Euler(YRotation);
 
-        Vector3 XRotation = new Vector3(-b_look.y * LookSpeed, 0, 0);
-        f_camera_rot *= Quaternion.Euler(XRotation);
-        f_camera_rot = clampRotationAroundXAxis(f_camera_rot, -90.0f, 90.0f);
-    
-        // Movement
-        Vector3 Forward = (PlayerRigidbody.rotation * Vector3.forward);
-        Vector3 Right = (PlayerRigidbody.rotation * Vector3.right);
-        Vector2 Velocity = b_movement * MovementSpeed;
-        d_player_pos = Velocity.x * Right + Velocity.y * Forward;
+            Vector3 XRotation = new Vector3(-b_look.y * LookSpeed, 0, 0);
+            f_camera_rot *= Quaternion.Euler(XRotation);
+            f_camera_rot = clampRotationAroundXAxis(f_camera_rot, -90.0f, 90.0f);
+
+            // Movement
+            Vector3 Forward = (PlayerRigidbody.rotation * Vector3.forward);
+            Vector3 Right = (PlayerRigidbody.rotation * Vector3.right);
+            Vector2 Velocity = b_movement * MovementSpeed;
+            d_player_pos = Velocity.x * Right + Velocity.y * Forward;
     }
 
     private void Jump(){
-        if(IsGrounded())
-        PlayerRigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
+        if (isLocalPlayer)
+        {
+            if (IsGrounded())
+                PlayerRigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
+        }
     }
     
     private bool IsGrounded(){
