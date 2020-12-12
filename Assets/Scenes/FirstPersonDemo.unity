@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.05
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.9150943, g: 0.77827644, b: 0.58272517, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -484,7 +484,7 @@ LightingSettings:
   m_PrefabAsset: {fileID: 0}
   m_Name: Settings.lighting
   serializedVersion: 2
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_EnableBakedLightmaps: 1
   m_EnableRealtimeLightmaps: 0
   m_RealtimeEnvironmentLighting: 0
@@ -1011,7 +1011,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c6d53fd1708294f469390f90ad8e6629,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.5075483
+      value: 6.42
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c6d53fd1708294f469390f90ad8e6629,
         type: 3}
@@ -1021,7 +1021,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: c6d53fd1708294f469390f90ad8e6629,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.1152222
+      value: 3.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c6d53fd1708294f469390f90ad8e6629,
         type: 3}
