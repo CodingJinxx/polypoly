@@ -49,7 +49,7 @@ namespace DefaultNamespace
                 hitpoint.y = 0.0f;
                 hitpoint.x = (int) hitpoint.x + Mathf.Sign(hitpoint.x) * 0.5f;
                 hitpoint.z = (int) hitpoint.z + Mathf.Sign(hitpoint.z) * 0.5f;
-
+            
                 if (m_GridSystem.IsTileTaken(hitpoint))
                 {
                     m_GridSystem.RemoveTile(hitpoint);

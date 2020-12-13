@@ -45,6 +45,9 @@ public class FirstPersonController : NetworkBehaviour, PlayerInput.IFirstPersonP
     private event Action b_fire;
     private event Action b_jump;
 
+    // Public Input Events
+    public event Action OnFireEvent { add => b_fire += value; remove => b_fire -= value; }
+
     private void OnEnable()
     {
         if (controls is null)
